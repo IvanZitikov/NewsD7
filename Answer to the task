@@ -1,0 +1,66 @@
+u1 = User.objects.create_user(username = "Иван Михайлович")
+u2 = User.objects.create_user(username = "Михаил Иванович")
+u3 = User.objects.create_user(username = "Клим Александрович")
+u4 = User.objects.create_user(username = "Гоблин")
+Author.objects.create(authorUser = u3)
+Author.objects.create(authorUser = u4)
+Category.objects.create(name = "Политика")
+Category.objects.create(name = "Экономика")
+Category.objects.create(name = "Специальная военная операция")
+Category.objects.create(name = "Юмор")
+author = Author.objects.get(id=1)
+Post.objects.create(author=author, categoryType = "NW", title = "Белиберда белибердень",text = " 2 страницы Белиберды белибердени")
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+Comment.objects.create(commentPost = Post.objects.get(id=1), commentUser = User.objects.get(id=4),text="Как всё супер мупер")
+author2 = Author.objects.get(id=2)
+Post.objects.create(author=author2, categoryType = "NW", title = "Великий ум",text = " 4 страницы Белиберды белибердени")
+post = Post.objects.get(id=1)
+category1 = Category.objects.get(name='Политика')
+category2 = Category.objects.get(name='Юмор')
+post.category.add(category1, category2)
+post2=Post.objects.get(id=4)
+category3 = Category.objects.get(id=4)
+post2.postCategory.add(category3)
+post.postCategory.add(category1,category2)
+Comment.objects.create(commentPost = Post.objects.get(id=1), commentUser = User.objects.get(id=4),text="Как всё супер мупер")
+Post.objects.create(author=author2, categoryType = "AR", title = "Великий юмор",text = " 2 страницы text")
+post4 =Post.objects.get(id=4)
+post4.postCategory.add(category2)
+Comment.objects.create(commentPost=Post.objects.get(id=1),commentUser=User.objects.get(id=1), text="Супер!Всё нравиться!!!")
+Comment.objects.create(commentPost=Post.objects.get(id=1),commentUser=User.objects.get(id=2), text="Супер!Всё нравиться!!!")
+Comment.objects.create(commentPost=Post.objects.get(id=2),commentUser=User.objects.get(id=2), text="Всё нравится!")
+Comment.objects.create(commentPost=Post.objects.get(id=4),commentUser=User.objects.get(id=3), text="Ну норм")
+Comment.objects.create(commentPost=Post.objects.get(id=4),commentUser=User.objects.get(id=4), text="Страйтесь лучше,пока не очень")
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=7).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=5).dislike()
+Comment.objects.get(id=4).like()
+Comment.objects.get(id=6).dislike()
+author.update_rating()
+author2.update_rating()
+author.ratingAuthor
+author2.ratingAuthor
+Post.objects.get(id=2).like()
+Post.objects.get(id=1).dislike()
+author.update_rating()
+author2.update_rating()
+author.ratingAuthor
+author2.ratingAuthor
+best = Author.objects._by("-ratingAuthor")[:1]
+for i in best:
+    i.ratingAuthor
+    i.authorUser.username
+Post.objects.filter(categoryType="AR")
+Post.objects.create(author=author, categoryType = "AR", title = "Всех победим",text = " 2 мы ломим")
+Post.objects.get(id=5).dislike()
+bestAR = Post.objects.filter(categoryType="AR").order_by("-rating")[:1]
+for i in bestAR:
+     i.dateCreation
+...  i.author.authorUser.username
+...  i.rating
+...  i.title
+...  i.text[:64]
+Post.objects.filter(categoryType="AR").order_by('-rating')[0].comment_set.all().values('dateCreation', 'commentUser__username', 'rating', 'text')
+
+
