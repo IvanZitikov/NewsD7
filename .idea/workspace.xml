@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0db2351-0c46-459c-bada-90b1c127cea9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/news/custom_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/news/templatetags/custom_filters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/news/templatetags/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/news/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/flatpages/default.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/new.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/news.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NewsPaper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NewsPaper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsPaper/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsPaper/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsPaper/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsPaper/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="c0db2351-0c46-459c-bada-90b1c127cea9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +101,7 @@
       <workItem from="1682485865656" duration="2203000" />
       <workItem from="1682492300940" duration="2861000" />
       <workItem from="1682516477487" duration="6475000" />
-      <workItem from="1682658055215" duration="14154000" />
+      <workItem from="1682658055215" duration="14454000" />
     </task>
     <servers />
   </component>
