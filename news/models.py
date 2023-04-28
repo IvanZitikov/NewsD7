@@ -40,6 +40,7 @@ class Post(models.Model):
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
 
+
     def like(self):
         self.rating += 1
         self.save()
