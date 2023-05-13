@@ -2,7 +2,7 @@ u1 = User.objects.create_user(username = "Иван Михайлович")
 u2 = User.objects.create_user(username = "Михаил Иванович")
 u3 = User.objects.create_user(username = "Клим Александрович")
 u4 = User.objects.create_user(username = "Гоблин")
-Author.objects.create(authorUser = u3)
+ex
 Author.objects.create(authorUser = u4)
 Category.objects.create(name = "Политика")
 Category.objects.create(name = "Экономика")

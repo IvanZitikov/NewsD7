@@ -1,6 +1,6 @@
 {% extends 'flatpages/default.html' %}
 
-{% load custom_filters %}
+{% load censor_filter %}
 {% load custom_tags %}
 
 {% block title %}
@@ -8,12 +8,13 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Все публикации</h1>
-    <h3>{{ time_now|date:'d m Y' }}</h3>
+    <h1>...Все публикации...</h1>
+    <h3>Сегодня: {{ time_now|date:'d m Y' }}</h3>
 
     <form action="" method="get">
         {{ filterset.form.as_p }}
-        <input type="submit" value="Найти" />
+
+    <a href="{% url 'news_search'  %}">Поиск публикации:</a>
     </form>
 
     <hr>
