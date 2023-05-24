@@ -1,0 +1,17 @@
+{% load censor_filter %}
+{% if news %}
+{% for new in news %}
+ <td>{{ new.title|censor }}</td>
+               <td>{{ new.text|truncatechars:20|censor  }}</td>
+               <td>..{{ new.dateCreation|date:'...  d m Y' }}</td>
+               <td>.....{{new.get_categoryType_display}}</td>
+               < <td>
+                        {% for cat in new.postCategory.all%}
+                            {{ cat.name }}
+                        {% endfor %}
+                    </td>
+
+{% endfor %}
+{% else %}
+<h2>Новых постов пока нет(</h2>
+{% endif %}

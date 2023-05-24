@@ -1,11 +1,13 @@
-from _ast import Delete
-
+from django.contrib.auth.decorators import login_required
+from django.db.models import Exists, OuterRef
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.cache import cache
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .filters import NewsFilter, NewsForm
-from .models import Post
+from .filters import NewsFilter, NewsForm, PostForm
+from .models import Post, Category, Subscription
 from datetime import datetime
 
 
@@ -56,7 +58,7 @@ class NewsDetail(DetailView):
 
         # если объекта нет в кэше, то получаем его и записываем в кэш
         if not obj:
-            object = super().get_object(queryset=self.queryset)
+            obj = super().get_object(queryset=self.queryset)
             cache.set(f'new-{self.kwargs["pk"]}', obj)
         return obj
 
@@ -64,14 +66,14 @@ class NewsDetail(DetailView):
 class NewsCreate(PermissionRequiredMixin, CreateView):
     permission_required = ('news.add_post',)
     raise_exception = True
-    form_class = NewsForm
+    form_class = PostForm
     model = Post
-    template_name ='create_news.html'
+    template_name = 'create_news.html'
 
 
 class NewsUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = ('news.change_post',)
-    form_class = NewsForm
+    form_class = PostForm
     model = Post
     template_name = 'news_edit.html'
 
@@ -84,7 +86,6 @@ class NewsDelete(PermissionRequiredMixin, DeleteView):
 
 
 class NewsSearch(ListView):
-    form_class = NewsFilter
     model = Post
     template_name = "news_search.html"
     context_object_name = 'news_search'
@@ -104,4 +105,55 @@ class NewsSearch(ListView):
         return context
 
 
-#
+class CategoryListView(ListView):
+    model = Post
+    template_name = 'categories.html'
+    context_object_name = 'category_list'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, id=self.kwargs['pk'])
+        queryset = Post.objects.filter(categoryType=self.category).order_by('-dateCreation')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_subscriber'] = self.request.user not in self.category.subscriptions.all()
+        context['category'] = self.category
+        return context
+
+
+@login_required
+@csrf_protect
+def subscriptions(request):
+    if request.method == 'POST':
+        category_id = request.POST.get('category_id')
+        category = Category.objects.get(id=category_id)
+        action = request.POST.get('action')
+
+        if action == 'subscribe':
+            Subscription.objects.create(user=request.user, category=category)
+        elif action == 'unsubscribe':
+            Subscription.objects.filter(
+                user=request.user,
+                category=category,
+            ).delete()
+
+    categories_with_subscriptions = Category.objects.annotate(
+        user_subscribed=Exists(
+            Subscription.objects.filter(
+                user=request.user,
+                category=OuterRef('pk'),
+            )
+        )
+    ).order_by('name')
+    return render(
+        request,
+        'subscriptions.html',
+        {'categories': categories_with_subscriptions},
+    )
+# @login_required
+# def subscribe(request, pk):
+#     user = request.user
+#     category = Category.objects.get(id=pk)
+#     category.subscribers.add(user)
+#     message = 'Вы успешно подписались на рассылку!'

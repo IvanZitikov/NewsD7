@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+<h1>Подписки по категориям :</h1>
+{% endblock title %}
+
+{% block content %}
+
+{% if category.id %}
+<div class="Subscription">
+    <em>
+        Subscription to
+    </em>
+
+    <a href="{#% url 'news:Subscription' category.id#}"class="button button-outline">
+        Subscription
+    </a>
+</div>
+{% endif %}
+{% include "news/inc/posts.html" %}
+{% endblock content %}
+
+
+

@@ -10,17 +10,17 @@
 {% endif %}
 <hr>
 <ul class="list-group list-group-flush">
-    {% for newspost in category_list %}
+    {% for new in category_list %}
     <li class="list-group-item">
         <small class="fw-bold">{{ newspost.date|'d m y' }}</small>
         <a href="{%url 'news_edit' newspost.id %}">{{ new.post.title }}</a>
-        <small class="text-muted">(Автор:-{{ newspost.author }})</small><br>
+        <small class="text-muted">(Автор:-{{new.author}})</ small > < br >
         <small class="fw-bold"> Категории:
-            {% for category in newspost.category.all %}
+            {% for category in new.category.all %}
                 <a href="{% url"category_list" category.id %}" {{ category }}
             {% endfor %}
         </small>
-        <p>{{ newspost.text|truncatechars:216 }}</p>
+        < p > {{new.text | truncatechars:216}} </ p >
     </li>
 {% endfor %}
 </ul>

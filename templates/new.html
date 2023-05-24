@@ -1,15 +1,16 @@
 {% extends 'flatpages/default.html' %}
+{% load censor_filter %}
 
 <!-- Название у нас будет Product -->
 {% block title %}
-new
+Публикация:
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
-<h1>{{ product }}</h1>
-{{ post.title }}
-{{ product.description }}
-{{ product.category.name }}
-{{ product.quantity }}
-{% endblock content %}
+<h1>{{ new.title|censor }}</h1>
+...{{ new.text|censor }}
+...{{ new.dateCreation|date:'...  d m Y' }}
+...{{new.get_categoryType_display}}
+{{new.author.authorUser}}
+...{% endblock content %}

@@ -9,7 +9,9 @@
 
 {% block content %}
     <h1>...Все публикации...</h1>
+
     <h3>Сегодня: {{ time_now|date:'d m Y' }}</h3>
+    <a href="{% url 'subscriptions' %}"><h3>Подписаться(жми сюда)</h3></a>
 
     <form action="" method="get">
         {{ filterset.form.as_p }}
@@ -30,6 +32,9 @@
                <td>Заголовки:   </td>
                <td>Тексты:  </td>
                <td>Дата публикации:</td>
+               <td>Вид публикации:</td>
+               <td>Категория публикации:</td>
+               <td>Автор публикации:</td>
                <td>Рейтинг</td>
            </tr>
 
@@ -38,7 +43,7 @@
                 <td>Действия</td>
                 {% endif %}
 
-          {% for new in news %}
+          {% for new in object_list %}
            <tr>
                <!-- Не забываем, что переменные в шаблоне ничем не отличаются
                 от переменных в Python. Здесь также можно получать доступ к
@@ -46,8 +51,15 @@
                 в следующем столбце описание, и т.д.  -->
                <td>{{ new.title|censor }}</td>
                <td>{{ new.text|truncatechars:20|censor  }}</td>
-               <td>{{ new.dateCreation|date:'d m Y' }}</td>
-               <td>{{new.rating }}</td>
+               <td>..{{ new.dateCreation|date:'...  d m Y' }}</td>
+               <td>.....{{new.get_categoryType_display}}</td>
+               < <td>
+                        {% for cat in new.postCategory.all%}
+                            {{ cat.name }}
+                        {% endfor %}
+                    </td>
+               <td>...{{new.author.authorUser}}</td>
+               <td>....{{new.rating }}</td>
            </tr>
 
                 <td>

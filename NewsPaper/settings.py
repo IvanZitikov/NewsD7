@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.yandex',
+    "django_apscheduler",
 
 ]
 SITE_ID = 1
@@ -80,6 +81,9 @@ WSGI_APPLICATION = 'NewsPaper.wsgi.application'
 # venv\scripts\activate
 # cd newspaper
 # py manage.py runserver
+# py manage.py makemigrations
+# py manage.py migrate
+
 
 
 # Database
@@ -136,7 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "/news"
 DEFAULT_FROM_EMAIL = "example@yandex.ru"
 SERVER_EMAIL = "example@yandex.ru"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'\
+# 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "example@yandex.ru"
