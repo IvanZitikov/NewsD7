@@ -81,8 +81,11 @@ WSGI_APPLICATION = 'NewsPaper.wsgi.application'
 # venv\scripts\activate
 # cd newspaper
 # py manage.py runserver
+# celery -A NewsPaper worker -l INFO --pool=solo
+# celery -A NewsPaper worker -l INFO
 # py manage.py makemigrations
 # py manage.py migrate
+# docker run -d -p 6379:6379 redis
 
 
 
@@ -149,3 +152,21 @@ EMAIL_HOST_USER = "example@yandex.ru"
 EMAIL_HOST_PASSWORD = "iliezvcovrxqizey"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Moscow'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+    }
+}
